@@ -24,8 +24,17 @@ public class Email {
 		this.department = this.setDepartment();
 		
 		//generating a random password
-		this.secretPhrase = "";
 		this.password = this.setRandomPassword();
+		this.secretPhrase = this.setSecretPhrase();
+	}
+	
+	//getters and setters name
+	public String getFirstName() {
+		return this.firstName;
+	}
+	
+	public String getLastName() {
+		return this.lastName;
 	}
 	
 	//getters and setters [Department]
@@ -63,13 +72,26 @@ public class Email {
 			department = "";
 			break;
 		}
-		input.close();
 		return department;
 	}
 	
 	//getters and setters password
+	private String getSecretPhrase() {
+		return this.secretPhrase;
+	}
+	
+	private String setSecretPhrase() {
+		String mysecretPhrase = "";
+		System.out.println("--Enter your new secretPhrase:--");
+		Scanner input = new Scanner(System.in);
+		mysecretPhrase = input.next();
+
+		input.close();
+		return mysecretPhrase;
+	}
+	
 	public String getPassword(String secretPhrase) {
-		if(secretPhrase == this.secretPhrase) {
+		if((this.getSecretPhrase()) == secretPhrase) {
 			return this.password;
 		}else {
 			return "Wrong secret phrase!!!";
