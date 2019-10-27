@@ -12,11 +12,12 @@ email address.
 	- Have get methods to display the name, email, and mailbox capacity
  */
 
+import com.EmailApplication.model.Email;
 
 public class EmailApplicationApp {
 
 	public static void main(String[] args) {
-		
+		Email employee1 = new Email("José","Gómez");
 		
 	}
 
