@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class Email {
 	//Encapsulating properties
+	final int PASSWORDLENGTH = 14;
 	private String firstName;
 	private String lastName;
 	private String password;
+	private String secretPhrase;
 	private String department;
 	private String alternativeEmail;
 	private int mailBoxCapacity;
 	
 	//constructors
-	public Email(){
-		
-	}
+	public Email(){}
 	
 	public Email(String firstName, String lastName){
 		this.firstName = firstName;
@@ -22,6 +22,10 @@ public class Email {
 		
 		//Calling method to set the department
 		this.department = this.setDepartment();
+		
+		//generating a random password
+		this.secretPhrase = "";
+		this.password = this.setRandomPassword();
 	}
 	
 	//getters and setters [Department]
@@ -32,10 +36,11 @@ public class Email {
 	private String setDepartment() {
 		String department = "";
 		Scanner input = new Scanner(System.in);
-		System.out.println("Please enter your department:\n1-Sales\n2-Development\n3-Accounting\n4-None");
+		System.out.println("--Department codes--");
+		System.out.println("1-Sales\n2-Development\n3-Accounting\n0-None");
+		System.out.println("Please enter your department code:\n");
 		department = input.next();
 		
-		//Sales\n2-Development\n3Accounting\n4-None"
 		switch(department) {
 		case "1":
 			department = "Sales";
@@ -49,7 +54,7 @@ public class Email {
 			department = "Accounting";
 
 			break;
-		case "4":
+		case "0":
 			department = "None";
 
 			break;
@@ -60,5 +65,26 @@ public class Email {
 		}
 		input.close();
 		return department;
+	}
+	
+	//getters and setters password
+	public String getPassword(String secretPhrase) {
+		if(secretPhrase == this.secretPhrase) {
+			return this.password;
+		}else {
+			return "Wrong secret phrase!!!";
+		}
+	}
+	
+	private String setRandomPassword() {
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String specialChar = "0123456789*/-_)(&%$#!|<>";
+		String passwordSet = alphabet.toLowerCase() + alphabet + specialChar;
+		char[] password = new char[PASSWORDLENGTH];
+		for(int i=0; i<PASSWORDLENGTH; i++) {
+			int randomCharacter = (int) (Math.random() * passwordSet.length());
+			password[i] = passwordSet.charAt(randomCharacter);
+		}
+		return new String (password);
 	}
 }
